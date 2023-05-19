@@ -1,0 +1,111 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Charter:wght@900&display=swap");
+body {
+  margin: 0;
+  line-height: normal;
+}
+:root {
+  /* fonts */
+  --body-2: Roboto;
+  --font-charter: Charter;
+
+  /* font sizes */
+  --body-2-size: 14px;
+  --caption-size: 12px;
+  --h6-size: 24px;
+  --body-1-medium-size: 16px;
+  --h5-size: 28px;
+  --font-size-lg: 18px;
+
+  /* Colors */
+  --grey-50: #f6f6f6;
+  --grey-100: #f5f5f5;
+  --color-whitesmoke-100: #f2f2f3;
+  --grey-200: #eee;
+  --white-white: #fcfcfd;
+  --grey-600: #757575;
+  --grey-800: #2b2b2b;
+  --colour-tableborder: #232425;
+  --grey-900: #212121;
+  --colour-card: #181a1c;
+  --colour-background: #121212;
+  --text-primary: rgba(255, 255, 255, 0.95);
+  --text-input: rgba(255, 255, 255, 0.05);
+  --text-disabled: rgba(255, 255, 255, 0.3);
+  --text-tertiary: rgba(255, 255, 255, 0.5);
+  --text-divider: rgba(255, 255, 255, 0.15);
+  --text-secondary: rgba(255, 255, 255, 0.7);
+  --color-white: #fff;
+  --data-positive: #3ffcae;
+  --color-mediumspringgreen-100: rgba(63, 252, 174, 0.04);
+  --highlight-negative: rgba(255, 76, 76, 0.07);
+  --data-negative: #c94242;
+  --color-dimgray: #616161;
+  --grey-400: #bdbdbd;
+  --colour-hover: rgba(64, 118, 184, 0.15);
+  --colour-primary: #3dacff;
+  --grey-500: #9e9e9e;
+  --grey-300: #e0e0e0;
+  --data-caution: #ffad4c;
+
+  /* Gaps */
+  --gap-base: 16px;
+  --gap-xl: 20px;
+  --gap-21xl: 40px;
+  --gap-xs: 12px;
+  --gap-7xs: 6px;
+  --gap-5xs: 8px;
+  --gap-9xs: 4px;
+  --gap-5xl: 24px;
+  --gap-3xs: 10px;
+  --gap-11xs: 2px;
+
+  /* Paddings */
+  --padding-xs: 12px;
+  --padding-21xl: 40px;
+  --padding-5xl: 24px;
+  --padding-4xs: 9px;
+  --padding-29xl: 48px;
+  --padding-base: 16px;
+  --padding-2xs: 11px;
+  --padding-11xs: 2px;
+  --padding-9xs: 4px;
+  --padding-sm: 14px;
+  --padding-13xl: 32px;
+  --padding-5xs: 8px;
+  --padding-7xs: 6px;
+
+  /* border radiuses */
+  --br-8xs: 5px;
+  --br-9xs: 4px;
+  --br-5xl: 24px;
+  --br-81xl: 100px;
+  --br-12xs: 1px;
+  --br-7xs: 6px;
+  --br-5xs: 8px;
+
+  /* Effects */
+  --background-blur: blur(8px);
+}
+.ant-popover-inner-content {
+  width: -moz-max-content;
+  /* width: max-content; */
+  max-width: 104%;
+  padding: 12px 16px;
+  color: rgba(0,0,0,.85);
+  width: 230px;
+}
+/* .ant-popover-content {
+  width: 256px;
+} */
+.ant-btn-sm {
+  /* height: 24px; */
+  padding: 0 7px;
+  /* font-size: 14px; */
+  /* border-radius: 2px; */
+  background-color: #fff;
+  border: 0px;
+}
+button.ant-btn.ant-btn-primary.ant-btn-sm {
+  background-color: #fff;
+}

@@ -1,0 +1,758 @@
+.loremIpsumDolor {
+  margin: 0;
+  align-self: stretch;
+  position: relative;
+  letter-spacing: 0.4px;
+  line-height: 16px;
+}
+.search {
+  position: relative;
+  letter-spacing: 0.25px;
+  line-height: 20px;
+}
+.searchWrapper {
+  flex: 1;
+  border: 1px solid var(--grey-500);
+  box-sizing: border-box;
+  height: 40px;
+  display: flex;
+  flex-direction: row;
+  padding: var(--padding-base);
+  align-items: center;
+  justify-content: flex-start;
+}
+.userplusIcon {
+  position: relative;
+  width: 16px;
+  height: 16px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.button1 {
+  position: relative;
+  letter-spacing: 0.25px;
+  line-height: 20px;
+  text-transform: capitalize;
+  font-weight: 500;
+}
+.button {
+  border-radius: var(--br-7xs);
+  border: 1px solid var(--colour-primary);
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  padding: var(--padding-5xs) var(--padding-xs);
+  align-items: center;
+  justify-content: center;
+  gap: var(--gap-5xs);
+}
+.toggleboardIcon {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.button2 {
+  align-self: stretch;
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  padding: var(--padding-sm) var(--padding-base);
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.toggleviewChild {
+  align-self: stretch;
+  position: relative;
+  border-right: 1px solid var(--grey-400);
+  box-sizing: border-box;
+  width: 1px;
+}
+.groupChild,
+.groupChild1,
+.groupChild2,
+.groupInner,
+.groupItem,
+.rectangleDiv {
+  position: absolute;
+  height: 21.05%;
+  width: 25%;
+  top: 0;
+  right: 193.75%;
+  bottom: 78.95%;
+  left: -118.75%;
+  border-radius: var(--br-12xs);
+  background-color: var(--colour-primary);
+}
+.groupChild1,
+.groupChild2,
+.groupInner,
+.groupItem,
+.rectangleDiv {
+  width: 87.5%;
+  right: 100%;
+  left: -87.5%;
+}
+.groupChild1,
+.groupChild2,
+.groupInner,
+.rectangleDiv {
+  top: 31.58%;
+  bottom: 47.37%;
+}
+.groupChild1,
+.groupChild2,
+.rectangleDiv {
+  top: 63.16%;
+  bottom: 15.79%;
+}
+.groupChild1,
+.groupChild2 {
+  width: 25%;
+  top: 31.58%;
+  right: 193.75%;
+  bottom: 47.37%;
+  left: -118.75%;
+}
+.groupChild2 {
+  top: 63.16%;
+  bottom: 15.79%;
+}
+.rectangleParent {
+  position: absolute;
+  height: 79.17%;
+  width: 66.67%;
+  top: 16.67%;
+  right: -54.17%;
+  bottom: 4.17%;
+  left: 87.5%;
+  transform: rotate(90deg);
+  transform-origin: 0 0;
+}
+.button3,
+.toggleview {
+  display: flex;
+  flex-direction: row;
+}
+.button3 {
+  align-self: stretch;
+  flex: 1;
+  background-color: var(--colour-hover);
+  padding: var(--padding-sm) var(--padding-base);
+  align-items: center;
+  justify-content: center;
+}
+.toggleview {
+  border-radius: var(--br-9xs);
+  border: 1px solid var(--grey-400);
+  box-sizing: border-box;
+  width: 80px;
+  height: 31px;
+  overflow: hidden;
+  flex-shrink: 0;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.toggleviewWrapper {
+  align-items: center;
+  justify-content: flex-start;
+}
+.buttonParent,
+.frameParent,
+.toggleviewWrapper {
+  display: flex;
+  flex-direction: row;
+}
+.buttonParent {
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-base);
+  color: var(--colour-primary);
+}
+.frameParent {
+  align-self: stretch;
+  align-items: center;
+  justify-content: space-between;
+}
+.socialIcons {
+  position: relative;
+  border-radius: var(--br-5xl);
+  width: 20px;
+  height: 20px;
+  display: none;
+}
+.navigationsortdownIcon {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  overflow: hidden;
+  flex-shrink: 0;
+  opacity: 0;
+}
+.applicant,
+.tableColumnHeader {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+.tableColumnHeader {
+  flex: 1;
+  gap: var(--gap-9xs);
+}
+.applicant {
+  align-self: stretch;
+  padding: var(--padding-base);
+  text-align: left;
+  color: var(--color-dimgray);
+}
+.checkboxIcon {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  display: none;
+  opacity: 0.7;
+}
+.frameChild {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+}
+.ronaldRichards {
+  margin: 0;
+  position: relative;
+  letter-spacing: 0.25px;
+  line-height: 20px;
+}
+.ronaldRichardsWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.accreditationBadgeIcon {
+  position: relative;
+  width: 24px;
+  height: 24.44px;
+}
+.applicant1,
+.checkboxParent {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+.checkboxParent {
+  flex: 1;
+  gap: var(--gap-base);
+}
+.applicant1 {
+  align-self: stretch;
+  border-top: 1px solid var(--text-divider);
+  padding: var(--padding-sm) var(--padding-base);
+}
+.frameItem {
+  border-radius: var(--br-81xl);
+}
+.ellipseIcon,
+.frameItem {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+}
+.applicantParent,
+.darleneRobertsonWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.darleneRobertsonWrapper {
+  margin: 0;
+}
+.applicantParent {
+  background-color: var(--grey-50);
+  width: 284px;
+  text-align: center;
+  font-size: var(--body-2-size);
+  color: var(--grey-900);
+  font-family: var(--body-2);
+}
+.tableColumnHeader1 {
+  width: 80px;
+  gap: var(--gap-9xs);
+}
+.applicant11,
+.tableColumnHeader1,
+.tableColumnHeader2 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+.tableColumnHeader2 {
+  width: 180px;
+  gap: var(--gap-9xs);
+}
+.applicant11 {
+  align-self: stretch;
+  height: 56px;
+  padding: var(--padding-base) var(--padding-13xl);
+  box-sizing: border-box;
+  gap: var(--gap-5xl);
+  font-size: var(--body-2-size);
+  color: var(--color-dimgray);
+}
+.loremIpsumDolor1,
+.p {
+  margin: 0;
+  position: relative;
+  letter-spacing: 0.4px;
+  line-height: 16px;
+  display: flex;
+  align-items: center;
+}
+.loremIpsumDolor1 {
+  flex: 1;
+}
+.applicant12 {
+  align-self: stretch;
+  border-top: 1px solid var(--text-divider);
+  box-sizing: border-box;
+  height: 76px;
+  display: flex;
+  flex-direction: row;
+  padding: var(--padding-sm) var(--padding-13xl);
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--gap-5xl);
+}
+.div,
+.loremIpsumDolor4 {
+  position: relative;
+  letter-spacing: 0.4px;
+  line-height: 16px;
+  display: flex;
+  align-items: center;
+}
+.loremIpsumDolor4 {
+  flex: 1;
+}
+.myTalentTableData {
+  background-color: var(--grey-100);
+  box-shadow: 5px 0 13px 2px rgba(0, 0, 0, 0.05) inset;
+  width: 1156px;
+  height: 816px;
+  overflow-x: auto;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  text-align: left;
+  font-size: var(--caption-size);
+  color: var(--grey-800);
+  font-family: var(--body-2);
+}
+.actionsettingsIcon {
+  position: relative;
+  width: 24px;
+  height: 24px;
+}
+.applicant22 {
+  align-self: stretch;
+  height: 56px;
+  display: flex;
+  flex-direction: row;
+  padding: var(--padding-base);
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+}
+.navigationmoreVert24pxIcon {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+.applicant23 {
+  align-self: stretch;
+  border-top: 1px solid var(--text-divider);
+  box-sizing: border-box;
+  height: 76px;
+  display: flex;
+  flex-direction: row;
+  padding: var(--padding-sm) var(--padding-base);
+  align-items: center;
+  justify-content: center;
+}
+.applicantGroup,
+.frameContainer,
+.rowsPerPageWrapper {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.applicantGroup {
+  background-color: var(--grey-50);
+  width: 52px;
+  flex-direction: column;
+}
+.frameContainer,
+.rowsPerPageWrapper {
+  flex-direction: row;
+}
+.frameContainer {
+  background-color: var(--colour-background);
+  width: 1440px;
+}
+.rowsPerPageWrapper {
+  margin: 0;
+}
+.arrowchevronIcon {
+  position: relative;
+  width: 20px;
+  height: 20px;
+}
+.group,
+.parent {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.parent {
+  cursor: pointer;
+}
+.group {
+  gap: var(--gap-5xs);
+}
+.colorIcon,
+.navigateRightChild {
+  position: absolute;
+  height: 50%;
+  top: 25%;
+  bottom: 25%;
+}
+.colorIcon {
+  width: 30.87%;
+  right: 44.13%;
+  left: 25%;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+}
+.navigateRightChild {
+  width: 8.33%;
+  right: 25%;
+  left: 66.67%;
+  background-color: var(--text-disabled);
+}
+.navigateRight {
+  transform: rotate(-180deg);
+  transform-origin: 0 0;
+}
+.navigateRight,
+.navigateRight1 {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  display: none;
+}
+.navigateRightParent,
+.pagination {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-9xs);
+}
+.pagination {
+  width: 1440px;
+  height: 40px;
+  padding: 18px;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--gap-base);
+}
+.frameGroup,
+.myprofilestable {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.frameGroup {
+  border-radius: 16px;
+  gap: var(--gap-base);
+  color: var(--color-dimgray);
+}
+.myprofilestable {
+  align-self: stretch;
+  gap: var(--gap-21xl);
+}
+.m {
+  position: relative;
+  font-size: var(--h6-size);
+  letter-spacing: 0.15px;
+  line-height: 24px;
+  color: var(--color-white);
+}
+.sinceLastMonth {
+  position: relative;
+  letter-spacing: 0.4px;
+  line-height: 16px;
+}
+.sinceLastMonthWrapper,
+.statusMetric {
+  display: flex;
+  justify-content: flex-start;
+}
+.sinceLastMonthWrapper {
+  flex-direction: row;
+  align-items: center;
+  text-align: left;
+  font-size: var(--caption-size);
+}
+.statusMetric {
+  flex: 1;
+  border-radius: var(--br-8xs);
+  flex-direction: column;
+  padding: var(--padding-2xs);
+  align-items: flex-start;
+  gap: var(--gap-xs);
+}
+.chips {
+  border-radius: var(--br-9xs);
+  background-color: var(--highlight-negative);
+  height: 16px;
+  display: flex;
+  flex-direction: row;
+  padding: var(--padding-11xs) var(--padding-9xs);
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+}
+.sinceLastMonth1 {
+  position: relative;
+  letter-spacing: 0.4px;
+  line-height: 16px;
+  color: var(--text-tertiary);
+}
+.chips2,
+.chipsParent {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.chipsParent {
+  justify-content: flex-start;
+  gap: var(--gap-7xs);
+  text-align: left;
+  font-size: var(--caption-size);
+  color: var(--data-negative);
+}
+.chips2 {
+  border-radius: var(--br-9xs);
+  background-color: var(--color-mediumspringgreen-100);
+  height: 16px;
+  padding: var(--padding-11xs) var(--padding-9xs);
+  box-sizing: border-box;
+  justify-content: center;
+}
+.chipsContainer,
+.commissionedAmountParent {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+.chipsContainer {
+  gap: var(--gap-7xs);
+  text-align: left;
+  font-size: var(--caption-size);
+  color: var(--data-positive);
+}
+.commissionedAmountParent {
+  gap: var(--gap-5xs);
+}
+.frameWrapper,
+.statusMetricParent {
+  align-self: stretch;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.statusMetricParent {
+  display: flex;
+  flex-direction: row;
+  gap: var(--gap-base);
+}
+.frameWrapper {
+  border-top: 1px solid var(--text-divider);
+  border-bottom: 1px solid var(--text-divider);
+  display: none;
+  flex-direction: column;
+  padding: var(--padding-base) 0;
+  text-align: center;
+  color: var(--text-tertiary);
+}
+.loremIpsumDolorSitAmetConParent,
+.myprofilestableParent {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.myprofilestableParent {
+  overflow-y: auto;
+  align-items: flex-start;
+  gap: var(--gap-21xl);
+  font-size: var(--body-2-size);
+  color: var(--grey-600);
+}
+.loremIpsumDolorSitAmetConParent {
+  position: absolute;
+  top: 63px;
+  left: -17px;
+  width: 1919px;
+  height: 1024px;
+  padding: var(--padding-29xl);
+  box-sizing: border-box;
+  align-items: center;
+}
+.vnLogoIcon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 33px;
+  height: 32px;
+}
+.talentAgency {
+  position: absolute;
+  top: 5px;
+  left: 37px;
+  letter-spacing: 0.5px;
+  line-height: 24px;
+}
+.vnLogoParent {
+  position: relative;
+  width: 131px;
+  height: 32px;
+}
+.topnavInner {
+  width: 114px;
+  display: none;
+  flex-direction: column;
+  padding: var(--padding-4xs);
+  box-sizing: border-box;
+  align-items: flex-start;
+  justify-content: center;
+}
+.socialIcon {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.unsplashCvwxhgqgOIcon {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  object-fit: cover;
+}
+.navigationappsOutline24pxParent {
+  display: none;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--gap-xl);
+}
+.iralNation {
+  margin: 0;
+  position: absolute;
+  top: 5px;
+  left: 37px;
+  font-size: inherit;
+  letter-spacing: 0.5px;
+  line-height: 24px;
+  font-weight: 400;
+  font-family: inherit;
+  color: inherit;
+}
+.vnLogoGroup {
+  position: relative;
+  width: 106px;
+  height: 32px;
+}
+.topnavChild {
+  width: 114px;
+  display: flex;
+  flex-direction: column;
+  padding: var(--padding-4xs);
+  box-sizing: border-box;
+  align-items: flex-start;
+  justify-content: center;
+  color: var(--colour-background);
+}
+.toggle {
+  position: relative;
+}
+.lightmodeFilledParent {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-base);
+  cursor: pointer;
+}
+.topnav,
+.viewpage {
+  text-align: left;
+  font-family: var(--body-2);
+}
+.topnav {
+  position: absolute;
+  /* top: 7px; */
+  position: fixed;
+  left: -17px;
+  background-color: var(--white-white);
+  width: 1920px;
+  display: flex;
+  flex-direction: row;
+padding: 14px;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: space-between;
+  font-size: var(--body-2-size);
+  color: var(--color-white);
+}
+.viewpage {
+  position: relative;
+  background-color: var(--color-whitesmoke-100);
+  width: 100%;
+  height: 1106px;
+  overflow: hidden;
+  font-size: var(--caption-size);
+  color: var(--color-dimgray);
+}
+ 
+@media only screen and (max-width:1920px) {
+  .cardbody{
+    padding: 20px 200px 100px 200px
+  }
+}
+@media only screen and (max-width:1536px) {
+  .cardbody{
+    padding: 20px 200px 100px 200px
+  }
+}
+@media only screen and (max-width:480px) {
+  .cardbody{
+    padding: 10px 0px 0px 0px
+  }
+}
