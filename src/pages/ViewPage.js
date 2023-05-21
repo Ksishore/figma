@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import "antd/dist/antd.min.css";
 import {
   Switch,
@@ -18,6 +18,7 @@ import {
   MoreOutlined,
   SettingOutlined,
 } from "@ant-design/icons";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import styles from "./ViewPage.module.css";
@@ -49,7 +50,49 @@ const ViewPage = () => {
   const navigate = useNavigate();
   const [searchItem, setSearchItem] = useState("");
   const [darkMode, setDarkMode] = useState(false);
-  console.log("darkMode", darkMode);
+
+  const [profiles, setProfiles] = useState([]);
+  console.log(profiles, "profiles");
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.post(
+          "https://api.poc.graphql.dev.vnplatform.com/graphql",
+          {
+            query:
+              "query GetAllProfiles($orderBy: globalOrderBy, $searchString: String, $rows: Int, $page: Int) { getAllProfiles(orderBy: $orderBy, searchString: $searchString, rows: $rows, page: $page) { size profiles { id first_name last_name email is_verified image_url description } } }",
+            variables: {
+              orderBy: {
+                key: "is_verified",
+                sort: "desc",
+              },
+              rows: 100,
+              page: 0,
+              searchString: "",
+            },
+          },
+          {
+            headers: {
+              Authorization:
+                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjYW5kaWRhdGVfbmFtZSI6InNhdHlha2lzaG9yZTA0QGdtYWlsLmNvbSIsImlzX2NhbmRpZGF0ZSI6dHJ1ZSwiaWF0IjoxNjg0MjQ2NDQ5LCJleHAiOjE2ODQ3NjQ4NDl9.WsMrvaV1W9f-aVtfBp86nfptBKpfEl3YlSfRcMwiaYw",
+            },
+          }
+        );
+
+        const data = response.data.data;
+        setProfiles(data.getAllProfiles.profiles);
+        setLoading(false);
+      } catch (error) {
+        setError(error.message);
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const searchProduct = (e) => {
     setSearchItem(e.target.value);
@@ -75,6 +118,9 @@ const ViewPage = () => {
       dataIndex: "description",
       sorter: (a, b) =>
         a?.description?.toLowerCase() < b?.description?.toLowerCase() ? 1 : -1,
+      render: (description) => {
+        return <div style={{ textTransform: "capitalize" }}>{description}</div>;
+      },
     },
     {
       title: <SettingOutlined />,
@@ -97,68 +143,7 @@ const ViewPage = () => {
       },
     },
   ];
-  const data = [
-    {
-      id: "123",
-      email: "binhan628@gmail.com",
-      description:
-        "Lorem ipsum dolor sit amet consectetur. Tortor ut cras mauris at faucibus pharetra pellentesque diam pulvinar.Mauris penatibus ut luctus posuere posuere odio nisimauris aliquet. Sapien aliquet porta tincidunt massa idquam pharetra. Massa vitae feugiat vulputate et praesentnisl neque nunc tortor.",
-    },
-    {
-      id: "123",
-      email: "danghoang87hl@gmail.com",
-      description:
-        " Lorem ipsum dolor sit amet consectetur. Tortor ut cras mauris at faucibus pharetra pellentesque diam pulvinar. Mauris penatibus ut luctus posuere posuere odio nisi mauris aliquet. Sapien aliquet porta tincidunt massa id quam pharetra. Massa vitae feugiat vulputate et praesent nisl neque nunc tortor.",
-    },
-    {
-      id: "123",
-      email: "manhhachkt08@gmail.com",
-      description:
-        " Lorem ipsum dolor sit amet consectetur. Tortor ut cras mauris at faucibus pharetra pellentesque diam pulvinar. Mauris penatibus ut luctus posuere posuere odio nisi mauris aliquet. Sapien aliquet porta tincidunt massa id       quam pharetra. Massa vitae feugiat vulputate et praesent        nisl neque nunc tortor.",
-    },
-    {
-      id: "123",
-      email: "tienlapspktnd@gmail.com",
-      description:
-        " Lorem ipsum dolor sit amet consectetur. Tortor ut cras mauris at faucibus pharetra pellentesque diam pulvinar. Mauris penatibus ut luctus posuere posuere odio nisi mauris aliquet. Sapien aliquet porta tincidunt massa id       quam pharetra. Massa vitae feugiat vulputate et praesent        nisl neque nunc tortor.",
-    },
-    {
-      id: "123",
-      email: "vuhaithuongnute@gmail.com",
-      description:
-        " Lorem ipsum dolor sit amet consectetur. Tortor ut cras mauris at faucibus pharetra pellentesque diam pulvinar. Mauris penatibus ut luctus posuere posuere odio nisi mauris aliquet. Sapien aliquet porta tincidunt massa id       quam pharetra. Massa vitae feugiat vulputate et praesent        nisl neque nunc tortor.",
-    },
-    {
-      id: "123",
-      email: "trungkienspktnd@gamail.com",
-      description:
-        " Lorem ipsum dolor sit amet consectetur. Tortor ut cras mauris at faucibus pharetra pellentesque diam pulvinar. Mauris penatibus ut luctus posuere posuere odio nisi mauris aliquet. Sapien aliquet porta tincidunt massa id       quam pharetra. Massa vitae feugiat vulputate et praesent        nisl neque nunc tortor.",
-    },
-    {
-      id: "123",
-      email: "ckctm12@gmail.com",
-      description:
-        " Lorem ipsum dolor sit amet consectetur. Tortor ut cras mauris at faucibus pharetra pellentesque diam pulvinar. Mauris penatibus ut luctus posuere posuere odio nisi mauris aliquet. Sapien aliquet porta tincidunt massa id       quam pharetra. Massa vitae feugiat vulputate et praesent        nisl neque nunc tortor.",
-    },
-    {
-      id: "123",
-      email: "darlene@gmail.com",
-      description:
-        " Lorem ipsum dolor sit amet consectetur. Tortor ut cras mauris at faucibus pharetra pellentesque diam pulvinar. Mauris penatibus ut luctus posuere posuere odio nisi mauris aliquet. Sapien aliquet porta tincidunt massa id       quam pharetra. Massa vitae feugiat vulputate et praesent        nisl neque nunc tortor.",
-    },
-    {
-      id: "123",
-      email: "lelsie@gmail.com",
-      description:
-        " Lorem ipsum dolor sit amet consectetur. Tortor ut cras mauris at faucibus pharetra pellentesque diam pulvinar. Mauris penatibus ut luctus posuere posuere odio nisi mauris aliquet. Sapien aliquet porta tincidunt massa id       quam pharetra. Massa vitae feugiat vulputate et praesent        nisl neque nunc tortor.",
-    },
-    {
-      id: "123",
-      email: "devonlane@gmail.com",
-      description:
-        " Lorem ipsum dolor sit amet consectetur. Tortor ut cras mauris at faucibus pharetra pellentesque diam pulvinar. Mauris penatibus ut luctus posuere posuere odio nisi mauris aliquet. Sapien aliquet porta tincidunt massa id       quam pharetra. Massa vitae feugiat vulputate et praesent        nisl neque nunc tortor.",
-    },
-  ];
+
   return (
     <div style={{ backgroundColor: "#f0f5ff", height: "auto" }}>
       <Col span={24}>
@@ -292,160 +277,31 @@ const ViewPage = () => {
                 <span style={{ marginBottom: "15px", marginLeft: "25px" }}>
                   Name
                 </span>
-                <Col style={{ marginTop: "15px" }}>
-                  <Row>
-                    <Col>
-                      <img
-                        className={styles.frameChild}
-                        alt=""
-                        src="/ellipse-1596@2x.png"
-                      />
-                    </Col>
-                    <Col>
-                      <p style={{ margin: "1rem" }}>Ronald Richards</p>
-                    </Col>
-                    <Col>
-                      <img
-                        style={{ marginTop: "15px" }}
-                        className={styles.accreditationBadgeIcon}
-                        alt=""
-                        src="/accreditation-badge.svg"
-                      />
-                    </Col>
-                  </Row>
-                </Col>
-                <Col style={{ marginTop: "17px" }}>
-                  <Row>
-                    <Col>
-                      <img
-                        className={styles.frameItem}
-                        alt=""
-                        src="/ellipse-15961@2x.png"
-                      />
-                    </Col>
-                    <Col>
-                      <p style={{ margin: "0.8rem" }}>MrBeast</p>
-                    </Col>
-                    <Col style={{ marginTop: "12px" }}>
-                      <img
-                        className={styles.accreditationBadgeIcon}
-                        alt=""
-                        src="/accreditation-badge.svg"
-                      />
-                    </Col>
-                  </Row>
-                </Col>
 
-                <Col style={{ marginTop: "17px" }}>
-                  <Row>
-                    <Col>
-                      <img
-                        className={styles.frameItem}
-                        alt=""
-                        src="/ellipse-15962@2x.png"
-                      />
+                {profiles &&
+                  profiles?.map((e) => (
+                    <Col style={{ marginTop: "17px" }}>
+                      <Row>
+                        <Col>
+                          <img
+                            className={styles.ellipseIcon}
+                            alt="profile"
+                            src={e?.image_url}
+                          />
+                        </Col>
+                        <Col>
+                          <p style={{ margin: "1rem" }}>{e?.first_name}</p>
+                        </Col>
+                        <Col style={{ marginTop: "12px" }}>
+                          <img
+                            className={styles.accreditationBadgeIcon}
+                            alt=""
+                            src="/accreditation-badge1.svg"
+                          />
+                        </Col>
+                      </Row>
                     </Col>
-                    <Col>
-                      <p style={{ margin: "0.8rem" }}>Jimmy Nelson</p>
-                    </Col>
-                    <Col style={{ marginTop: "12px" }}>
-                      <img
-                        className={styles.accreditationBadgeIcon}
-                        alt=""
-                        src="/accreditation-badge.svg"
-                      />
-                    </Col>
-                  </Row>
-                </Col>
-
-                <Col style={{ marginTop: "17px" }}>
-                  <Row>
-                    <Col>
-                      <img
-                        className={styles.ellipseIcon}
-                        alt=""
-                        src="/ellipse-15963@2x.png"
-                      />
-                    </Col>
-                    <Col>
-                      <p style={{ margin: "0.8rem" }}>Ralph Edwards</p>
-                    </Col>
-                    <Col style={{ marginTop: "12px" }}>
-                      <img
-                        className={styles.accreditationBadgeIcon}
-                        alt=""
-                        src="/accreditation-badge.svg"
-                      />
-                    </Col>
-                  </Row>
-                </Col>
-
-                <Col style={{ marginTop: "17px" }}>
-                  <Row>
-                    <Col>
-                      <img
-                        className={styles.ellipseIcon}
-                        alt=""
-                        src="/ellipse-15964@2x.png"
-                      />
-                    </Col>
-                    <Col>
-                      <p style={{ margin: "0.8rem" }}> Marvin Gary McKin...</p>
-                    </Col>
-                    <Col style={{ marginTop: "12px" }}>
-                      <img
-                        className={styles.accreditationBadgeIcon}
-                        alt=""
-                        src="/accreditation-badge1.svg"
-                      />
-                    </Col>
-                  </Row>
-                </Col>
-
-                <Col style={{ marginTop: "17px" }}>
-                  <Row>
-                    <Col>
-                      <img
-                        className={styles.ellipseIcon}
-                        alt=""
-                        src="/ellipse-15965@2x.png"
-                      />
-                    </Col>
-                    <Col>
-                      <p style={{ margin: "0.8rem" }}> Jacob Jones</p>
-                    </Col>
-                    <Col style={{ marginTop: "12px" }}>
-                      <img
-                        className={styles.accreditationBadgeIcon}
-                        alt=""
-                        src="/accreditation-badge1.svg"
-                      />
-                    </Col>
-                  </Row>
-                </Col>
-
-                <Col style={{ marginTop: "17px" }}>
-                  <Row>
-                    <Col>
-                      <img
-                        className={styles.ellipseIcon}
-                        alt=""
-                        src="/ellipse-15966@2x.png"
-                      />
-                    </Col>
-                    <Col>
-                      <p style={{ margin: "0.8rem" }}> Darrell Steward</p>
-                    </Col>
-                    <Col style={{ marginTop: "12px" }}>
-                      <img
-                        className={styles.accreditationBadgeIcon}
-                        alt=""
-                        src="/accreditation-badge1.svg"
-                      />
-                    </Col>
-                  </Row>
-                </Col>
-
+                  ))}
                 <Col style={{ marginTop: "17px" }}>
                   <Row>
                     <Col>
@@ -467,53 +323,8 @@ const ViewPage = () => {
                     </Col>
                   </Row>
                 </Col>
-
-                <Col style={{ marginTop: "17px" }}>
-                  <Row>
-                    <Col>
-                      <img
-                        className={styles.ellipseIcon}
-                        alt=""
-                        src="/ellipse-15968@2x.png"
-                      />
-                    </Col>
-                    <Col>
-                      <p style={{ margin: "0.8rem" }}> Leslie Alexander</p>
-                    </Col>
-                    <Col style={{ marginTop: "12px" }}>
-                      <img
-                        className={styles.accreditationBadgeIcon}
-                        alt=""
-                        src="/accreditation-badge1.svg"
-                      />
-                    </Col>
-                  </Row>
-                </Col>
-
-                <Col style={{ marginTop: "17px" }}>
-                  <Row>
-                    <Col>
-                      <img
-                        className={styles.ellipseIcon}
-                        alt=""
-                        src="/ellipse-15969@2x.png"
-                      />
-                    </Col>
-                    <Col>
-                      <p style={{ margin: "0.8rem" }}>Devon Lane</p>
-                    </Col>
-                    <Col style={{ marginTop: "12px" }}>
-                      <img
-                        className={styles.accreditationBadgeIcon}
-                        alt=""
-                        src="/accreditation-badge1.svg"
-                      />
-                    </Col>
-                  </Row>
-                </Col>
               </Card>
             </Col>
-
             <Col
               xl={{ span: 17, offset: 0 }}
               lg={{ span: 24, offset: 0 }}
@@ -527,8 +338,8 @@ const ViewPage = () => {
                 columns={columns}
                 dataSource={
                   searchItem.length == 0
-                    ? data
-                    : data.filter(
+                    ? profiles
+                    : profiles.filter(
                         (e) =>
                           e.id.indexOf(searchItem) > -1 ||
                           e.email.indexOf(searchItem) > -1 ||
@@ -548,3 +359,5 @@ const ViewPage = () => {
 };
 
 export default ViewPage;
+
+
