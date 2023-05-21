@@ -48,6 +48,50 @@ const TotalData = () => {
   const [isFrame6Open, setFrame6Open] = useState(false);
   const [isFrame7Open, setFrame7Open] = useState(false);
   const [isMoreDropdownOpen, setMoreDropdownOpen] = useState(false);
+
+  const [profiles, setProfiles] = useState([]);
+  console.log(profiles, "profiles");
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.post(
+          "https://api.poc.graphql.dev.vnplatform.com/graphql",
+          {
+            query:
+              "query GetAllProfiles($orderBy: globalOrderBy, $searchString: String, $rows: Int, $page: Int) { getAllProfiles(orderBy: $orderBy, searchString: $searchString, rows: $rows, page: $page) { size profiles { id first_name last_name email is_verified image_url description } } }",
+            variables: {
+              orderBy: {
+                key: "is_verified",
+                sort: "desc",
+              },
+              rows: 100,
+              page: 0,
+              searchString: "",
+            },
+          },
+          {
+            headers: {
+              Authorization:
+                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjYW5kaWRhdGVfbmFtZSI6InNhdHlha2lzaG9yZTA0QGdtYWlsLmNvbSIsImlzX2NhbmRpZGF0ZSI6dHJ1ZSwiaWF0IjoxNjg0MjQ2NDQ5LCJleHAiOjE2ODQ3NjQ4NDl9.WsMrvaV1W9f-aVtfBp86nfptBKpfEl3YlSfRcMwiaYw",
+            },
+          }
+        );
+
+        const data = response.data.data;
+        setProfiles(data.getAllProfiles.profiles);
+        setLoading(false);
+      } catch (error) {
+        setError(error.message);
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   const onButtonContainer1Click = useCallback(() => {
     navigate("/");
   }, [navigate]);
