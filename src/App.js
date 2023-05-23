@@ -60,10 +60,10 @@ function App() {
 
   return (
     <Routes>
-        <Route path="/" element={<ViewPage />} />
-      <Route path="/editprofile" element={<EditProfile />} />
+      <Route path="/" element={<ViewPage />} />
+      <Route path="/editprofile/:id" element={<EditProfile />} />
       <Route path="/createprofile" element={<CreateProfile />} />
-      <Route path="/totaldata" element={<TotalData />} />      
+      <Route path="/totaldata" element={<TotalData />} />
     </Routes>
   );
 }
