@@ -22,30 +22,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import styles from "./ViewPage.module.css";
-const content = (
-  <div>
-    <Link to="/editProfile">
-      <Button style={{ border: "0px", marginLeft: "40px" }}>
-        Edit Profile
-      </Button>
-    </Link>
-    <br />
-    <Popconfirm
-      title="Removed profile will be deleted permenantly and Won't be available anymore."
-      description="Are you sure"
-      okText={
-        <Button style={{ backgroundColor: "red", color: "#fff" }}>
-          Delete
-        </Button>
-      }
-      cancelText={<Button>Cancel</Button>}
-    >
-      <Button style={{ border: "0px", marginLeft: "40px" }}>
-        Remove Profile
-      </Button>
-    </Popconfirm>
-  </div>
-);
+
 const ViewPage = () => {
   const navigate = useNavigate();
   const [searchItem, setSearchItem] = useState("");
@@ -57,51 +34,80 @@ const ViewPage = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    
-    const fetchData = async () => {
-      try {
-        const response = await axios.post(
-          "https://api.poc.graphql.dev.vnplatform.com/graphql",
-          {
-            query:
-              "query GetAllProfiles($orderBy: globalOrderBy, $searchString: String, $rows: Int, $page: Int) { getAllProfiles(orderBy: $orderBy, searchString: $searchString, rows: $rows, page: $page) { size profiles { id first_name last_name email is_verified image_url description } } }",
-            variables: {
-              orderBy: {
-                key: "is_verified",
-                sort: "desc",
-              },
-              rows: 100,
-              page: 0,
-              searchString: "",
-            },
-          },
-          {
-            headers: {
-              Authorization:
-                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjYW5kaWRhdGVfbmFtZSI6InNhdHlha2lzaG9yZTA0QGdtYWlsLmNvbSIsImlzX2NhbmRpZGF0ZSI6dHJ1ZSwiaWF0IjoxNjg0MjQ2NDQ5LCJleHAiOjE2ODQ3NjQ4NDl9.WsMrvaV1W9f-aVtfBp86nfptBKpfEl3YlSfRcMwiaYw",
-            },
-          }
-        );
-
-        const data = response.data.data;
-        setProfiles(data.getAllProfiles.profiles);
-        setLoading(false);
-      } catch (error) {
-        setError(error.message);
-        setLoading(false);
-      }
-    };
-
     fetchData();
   }, []);
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.post(
+        "https://api.poc.graphql.dev.vnplatform.com/graphql",
+        {
+          query:
+            "query GetAllProfiles($orderBy: globalOrderBy, $searchString: String, $rows: Int, $page: Int) { getAllProfiles(orderBy: $orderBy, searchString: $searchString, rows: $rows, page: $page) { size profiles { id first_name last_name email is_verified image_url description } } }",
+          variables: {
+            orderBy: {
+              key: "is_verified",
+              sort: "desc",
+            },
+            rows: 100,
+            page: 0,
+            searchString: "",
+          },
+        },
+        {
+          headers: {
+            Authorization:
+              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjYW5kaWRhdGVfbmFtZSI6InNhdHlha2lzaG9yZTA0QGdtYWlsLmNvbSIsImlzX2NhbmRpZGF0ZSI6dHJ1ZSwiaWF0IjoxNjg0MjQ2NDQ5LCJleHAiOjE2ODQ3NjQ4NDl9.WsMrvaV1W9f-aVtfBp86nfptBKpfEl3YlSfRcMwiaYw",
+          },
+        }
+      );
+
+      const data = response.data.data;
+      setProfiles(data.getAllProfiles.profiles);
+      setLoading(false);
+    } catch (error) {
+      setError(error.message);
+      setLoading(false);
+    }
+  };
+
+  const handleDelete = (record) => {
+    console.log(record?.id, "record");
+    let id = record?.id;
+
+    fetch("https://api.poc.graphql.dev.vnplatform.com/graphql", {
+      method: "POST",
+      headers: {
+        Authorization:
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjYW5kaWRhdGVfbmFtZSI6InNhdHlha2lzaG9yZTA0QGdtYWlsLmNvbSIsImlzX2NhbmRpZGF0ZSI6dHJ1ZSwiaWF0IjoxNjg0MjQ2NDQ5LCJleHAiOjE2ODQ3NjQ4NDl9.WsMrvaV1W9f-aVtfBp86nfptBKpfEl3YlSfRcMwiaYw",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        query:
+          "mutation DeleteProfile($deleteProfileId: String!) { deleteProfile(id: $deleteProfileId) }",
+        variables: { deleteProfileId: id },
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Profile deleted:", data);
+        alert("Profile Deleted Successfully");
+        fetchData();
+      })
+      .catch((error) => {
+        console.error("Error deleting profile:", error);
+      });
+  };
 
   const searchProduct = (e) => {
     setSearchItem(e.target.value);
     console.log("search", searchItem);
   };
+
   const onButtonContainer1Click = useCallback(() => {
     navigate("/totaldata");
   }, [navigate]);
+
   const columns = [
     {
       title: "ID",
@@ -126,7 +132,7 @@ const ViewPage = () => {
     {
       title: <SettingOutlined />,
       dataIndex: "action",
-      render: (createdAt) => {
+      render: (createdAt, record) => {
         return (
           <span
             className="col_styling"
@@ -134,7 +140,43 @@ const ViewPage = () => {
               textTransform: "capitalize",
             }}
           >
-            <Popover content={content} trigger="hover">
+            <Popover
+              content={
+                <div>
+                  <Link to={`/editProfile/${record?.id}`}>
+                    <Button
+                      onClick={() => {
+                        // window.location.href = `/editProfile/${record?.id}`;
+                      }}
+                      style={{ border: "0px", marginLeft: "40px" }}
+                    >
+                      Edit Profile
+                    </Button>
+                  </Link>
+                  <br />
+                  <Popconfirm
+                    title="Removed profile will be deleted permenantly and Won't be available anymore."
+                    description="Are you sure"
+                    okText={
+                      <Button
+                        onClick={() => {
+                          handleDelete(record);
+                        }}
+                        style={{ backgroundColor: "red", color: "#fff" }}
+                      >
+                        Delete
+                      </Button>
+                    }
+                    cancelText={<Button>Cancel</Button>}
+                  >
+                    <Button style={{ border: "0px", marginLeft: "40px" }}>
+                      Remove Profile
+                    </Button>
+                  </Popconfirm>
+                </div>
+              }
+              trigger="hover"
+            >
               <Button style={{ border: "0px" }}>
                 <MoreOutlined />
               </Button>
@@ -360,5 +402,3 @@ const ViewPage = () => {
 };
 
 export default ViewPage;
-
-
