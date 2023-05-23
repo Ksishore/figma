@@ -1,15 +1,147 @@
+import React, { useState, useEffect } from "react";
 import "antd/dist/antd.min.css";
 import { Input, Switch, Button, Col, Row, Card, Checkbox, Form } from "antd";
 import { CloseOutlined } from "@ant-design/icons";
 import styles from "./EditProfile.module.css";
+import axios from "axios";
 const { TextArea } = Input;
-const EditProfile = () => {
-  const onFinish = (values) => {
-    console.log("Success:", values);
+const EditProfile = (props) => {
+  console.log(props, "props");
+
+  const [isVerified, setIsVerified] = useState(false);
+
+  useEffect(() => {
+    getProfileDetails();
+  }, []);
+
+  const getProfileDetails = () => {
+    let id = window.location.pathname.split("/")[2];
+    console.log(id);
+
+    // Request data
+    const requestData = {
+      name: "getProfileById",
+      request: {
+        method: "POST",
+        header: [
+          {
+            key: "Authorization",
+            value:
+              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjYW5kaWRhdGVfbmFtZSI6InNhdHlha2lzaG9yZTA0QGdtYWlsLmNvbSIsImlzX2NhbmRpZGF0ZSI6dHJ1ZSwiaWF0IjoxNjg0MjQ2NDQ5LCJleHAiOjE2ODQ3NjQ4NDl9.WsMrvaV1W9f-aVtfBp86nfptBKpfEl3YlSfRcMwiaYw",
+
+            type: "text",
+          },
+        ],
+        body: {
+          mode: "graphql",
+          graphql: {
+            query:
+              "query GetProfileById($getProfileByIdId: String!) {\n  getProfileById(id: $getProfileByIdId) {\n    id\n    first_name\n    last_name\n    email\n    is_verified\n    image_url\n    description\n  }\n}",
+            variables: '{\n  "getProfileByIdId": "' + id + '"\n}',
+          },
+        },
+        url: {
+          raw: "https://api.poc.graphql.dev.vnplatform.com/graphql",
+          protocol: "https",
+          host: ["api", "poc", "graphql", "dev", "vnplatform", "com"],
+          path: ["graphql"],
+        },
+        description:
+          "//Variables accepted by the api.\n\n- accepts id (string)\n    \n\n// Expected output\n\n- returns the profile",
+      },
+    };
+
+    // Make the API call
+    axios({
+      method: requestData.request.method,
+      url: requestData.request.url.raw,
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: requestData.request.header[0].value,
+      },
+      data: requestData.request.body,
+    })
+      .then((response) => {
+        console.log(response.data); // Process the response data here
+      })
+      .catch((error) => {
+        console.log("An error occurred:", error);
+      });
   };
-  const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
+
+  const onFinish = async (values) => {
+    const {
+      first_name: firstName,
+      last_name: lastName,
+      email,
+      image_url: imageUrl,
+      description,
+    } = values;
+
+    values["is_verified"] = isVerified;
+
+    console.log(values, "values");
+    return;
+    try {
+      const response = await axios.post(
+        "https://api.poc.graphql.dev.vnplatform.com/graphql",
+        {
+          query: `
+            mutation UpdateProfile(
+              $updateProfileId: String!,
+              $firstName: String!,
+              $lastName: String!,
+              $email: String!,
+              $isVerified: Boolean!,
+              $imageUrl: String!,
+              $description: String!
+            ) {
+              updateProfile(
+                id: $updateProfileId,
+                first_name: $firstName,
+                last_name: $lastName,
+                email: $email,
+                is_verified: $isVerified,
+                image_url: $imageUrl,
+                description: $description
+              ) {
+                id
+                first_name
+                last_name
+                email
+                is_verified
+                image_url
+                description
+              }
+            }
+          `,
+          variables: {
+            updateProfileId: "hrrcQa1J3oxwTDE52a0E",
+            firstName: "test",
+            lastName: "updated",
+            email: "test@updated.com",
+            isVerified: false,
+            imageUrl: "test.com",
+            description: "test updated",
+          },
+        },
+        {
+          headers: {
+            Authorization:
+              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjYW5kaWRhdGVfbmFtZSI6IlNpbWFyIiwiaXNfY2FuZGlkYXRlIjp0cnVlLCJpYXQiOjE2NzcyNzAxNTMsImV4cCI6MTY3NzYxNTc1M30.OERVKTr3kCq5cS_QzRWmiEfbPHemMPlW6GXep7IyvA0",
+          },
+        }
+      );
+      console.log(response);
+      if (response.data) {
+        document.getElementById("createProfile").reset();
+        window.location.href = "/";
+      }
+    } catch (error) {
+      setError(error.message);
+    }
   };
+
   return (
     <div className={styles.editprofile}>
       <Col span={24}>
@@ -44,7 +176,6 @@ const EditProfile = () => {
               }}
               style={{ marginTop: "70px" }}
               onFinish={onFinish}
-              onFinishFailed={onFinishFailed}
               autoComplete="on"
             >
               <span style={{ fontWeight: "bold" }}>Image link</span>
