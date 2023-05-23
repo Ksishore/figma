@@ -57,6 +57,7 @@ const ViewPage = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    
     const fetchData = async () => {
       try {
         const response = await axios.post(
